@@ -1,0 +1,13 @@
+{
+ "RunFCS.assembly": "HG002-full-0.14_mat.fa.gz",
+ "RunFCS.wrapperScript": "fcs.py",
+ "RunFCS.blast_div": "/my_tmpfs/gxdb/all.blast_div.tsv.gz",
+ "RunFCS.GXI": "/my_tmpfs/gxdb/all.gxi",
+ "RunFCS.GXS": "/my_tmpfs/gxdb/all.gxs",
+ "RunFCS.manifest": "/my_tmpfs/gxdb/all.manifest",
+ "RunFCS.metaJSON": "/my_tmpfs/gxdb/all.meta.jsonl",
+ "RunFCS.seq_info":"/my_tmpfs/gxdb/all.seq_info.tsv.gz",
+ "RunFCS.taxa": "/my_tmpfs/gxdb/all.taxa.tsv",
+ "RunFCS.threadCount": 20,
+ "RunFCS.preemptible": 1
+}
