@@ -42,6 +42,7 @@ workflow RunFCS{
     output {
         File cleanFasta = FCSGX.cleanFasta
         File contamFasta = FCSGX.contamFasta
+        File report = FCSGX.report
     }
     meta {
         author: "Hailey Loucks"
@@ -98,6 +99,7 @@ task FCSGX {
     output {
         File cleanFasta = "~{asm_name}.clean.fasta.gz"
         File contamFasta = "~{asm_name}.contam.fasta.gz"
+        File report = "~{asm_name}.9606.fcs_gx_report.txt"
     }
 
     runtime {
