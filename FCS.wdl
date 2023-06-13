@@ -116,7 +116,7 @@ task FCSGX {
         File contamFasta = "~{asm_name}.contam.fasta.gz"
         File report = "~{asm_name}.9606.fcs_gx_report.txt"
         File adapter_CleanedSequence = "~{asm_name}.adapterClean.fa.gz"
-        File adapter_Report
+        File adapter_Report = "fcs_adaptor_report.txt"
     }
 
     runtime {
