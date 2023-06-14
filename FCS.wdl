@@ -15,7 +15,8 @@ workflow RunFCS{
         File taxa
 
         Int threadCount
-        Int preemptible
+        Int preemptible = 1
+        Int diskSizeGB  = 32
 
         String GxDB = sub(GXI, "\\.gxi$", "")
         String asm_name=sub(assembly, "\\.gz$", "")
@@ -39,7 +40,8 @@ workflow RunFCS{
 
 
             preemptible=preemptible,
-            threadCount=threadCount
+            threadCount=threadCount,
+            diskSizeGB=diskSizeGB
     }
 
     output {
@@ -73,7 +75,8 @@ task FCSGX {
         String GxDB
 
         Int memSizeGB = 32
-        Int preemptible
+        Int preemptible = 1
+        Int diskSizeGB
         Int threadCount
 
     }
@@ -121,6 +124,7 @@ task FCSGX {
 
     runtime {
         memory: memSizeGB + " GB"
+        disks: "local-disk " + diskSizeGB + " SSD"
         preemptible : preemptible
     }
 }
