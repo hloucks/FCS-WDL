@@ -126,5 +126,6 @@ task FCSGX {
         memory: memSizeGB + " GB"
         disks: "local-disk " + diskSizeGB + " SSD"
         preemptible : preemptible
+        docker: '/var/run/docker.sock:/var/run/docker.sock'
     }
 }
