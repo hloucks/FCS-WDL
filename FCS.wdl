@@ -126,6 +126,6 @@ task FCSGX {
         memory: memSizeGB + " GB"
         disks: "local-disk " + diskSizeGB + " SSD"
         preemptible : preemptible
-        docker: 'docker:stable-dind'
+        docker: 'ncbi/fcs-gx:latest '
     }
 }
