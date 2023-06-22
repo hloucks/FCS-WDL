@@ -6,17 +6,13 @@ This workflow will run FCS-GX and FCS Adapter workflows and output the reports g
 
 ## Inputs 
 - Assembly
-- FCS GX wrapper script [fcs.py](https://github.com/ncbi/fcs/raw/main/dist/fcs.py)
-- FCS adapter script [run_fcsadaptor.sh](https://github.com/ncbi/fcs/raw/main/dist/run_fcsadaptor.sh)
-- FCS - GX database download instructions [here](https://github.com/ncbi/fcs/wiki/FCS-GX) (use wrapper script validation step before running)
+- FCS - GX database download instructions [here](https://github.com/ncbi/fcs/wiki/FCS-GX)  (validation step before running)
 
 If running locally, the inputs.json file should look something like this:
 
 ```
 {
  "RunFCS.assembly": "Assembly.fa.gz",
- "RunFCS.wrapperScript": "fcs.py",
- "RunFCS.adapterScript": "run_fcsadaptor.sh",
  "RunFCS.blast_div": "/my_tmpfs/test-only/test-only.blast_div.tsv.gz",
  "RunFCS.GXI": "/my_tmpfs/test-only/test-only.gxi",
  "RunFCS.GXS": "/my_tmpfs/test-only/test-only.gxs",
@@ -40,6 +36,6 @@ The script will localize all of the database files - you can ignore the readme f
 
 
 ## Notes
-- This workflow is hard coded for human assemblies as of 6/13/23, I'm planning on adding an option of other taxa but haven't yet 
+- This workflow is hard coded for human assemblies 
 - As of 6/13/23 there is an issue with the output of FCS-adapter being labeled as .gz but not gzipped, which you can see reflected in this workflow. If FCS adapter updates this it will need to be updated
 - The naming convention of the outfiles often includes ".fa" due to the naming convention of the FCS GX screen

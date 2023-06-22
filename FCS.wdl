@@ -3,8 +3,6 @@ version 1.0
 workflow RunFCS{
     input {
         File assembly
-        File wrapperScript
-        File adapterScript
         
         File blast_div
         File GXI
@@ -18,15 +16,13 @@ workflow RunFCS{
         Int preemptible = 1
         Int diskSizeGB  = 32
 
-        String GxDB = sub(GXI, "\\.gxi$", "")
+        String GxDB = basename(GXI, ".gxi")
         String asm_name=sub(assembly, "\\.gz$", "")
     }
 
     call FCSGX {
         input:
             assembly=assembly,
-            wrapperScript=wrapperScript,
-            adapterScript=adapterScript,
             blast_div=blast_div,
             GXI=GXI,
             GXS=GXS,
@@ -43,13 +39,24 @@ workflow RunFCS{
             threadCount=threadCount,
             diskSizeGB=diskSizeGB
     }
+    call FCS_adapter{
+        input:
+            cleanFasta = FCSGX.cleanFasta,
+            asm_name=asm_name,
+
+
+            preemptible=preemptible,
+            threadCount=threadCount,
+            diskSizeGB=diskSizeGB
+    }
 
     output {
         File cleanFasta = FCSGX.cleanFasta
         File contamFasta = FCSGX.contamFasta
         File report = FCSGX.report
-        File adapter_CleanedSequence = FCSGX.adapter_CleanedSequence
-        File adapter_Report = FCSGX.adapter_Report
+        
+        File adapter_CleanedSequence = FCS_adapter.adapter_CleanedSequence
+        File adapter_Report = FCS_adapter.adapter_Report
     }
     meta {
         author: "Hailey Loucks"
@@ -60,8 +67,6 @@ workflow RunFCS{
 task FCSGX {
     input{
         File assembly
-        File wrapperScript 
-        File adapterScript
         File blast_div
         File GXI
         File GXS
@@ -96,30 +101,19 @@ task FCSGX {
         ln -s ~{taxa}
 
         ln -s ~{assembly}
-        ln -s ~{wrapperScript}
-        ln -s ~{adapterScript}
 
-        python3 ~{wrapperScript} screen genome --fasta ~{assembly} --gx-db ~{GxDB} --out-dir . --tax-id 9606
-        zcat ~{assembly} | python3 ~{wrapperScript} clean genome --action-report ~{asm_name}.9606.fcs_gx_report.txt --output ~{asm_name}.clean.fasta --contam-fasta-out ~{asm_name}.contam.fasta
+        python3 /app/bin/run_gx --fasta ~{assembly} --gx-db ~{GxDB} --out-dir . --tax-id 9606
+        zcat ~{assembly} | /app/bin/gx clean-genome --action-report ~{asm_name}.9606.fcs_gx_report.txt --output ~{asm_name}.clean.fasta --contam-fasta-out ~{asm_name}.contam.fasta 
 
-        # Run the adapter script 
-        ~{adapterScript} --fasta-input ~{asm_name}.clean.fasta --output-dir . --euk
-        mv cleaned_sequences/* ~{asm_name}.adapterClean.fa # the output of FCS adapter is not actually gzipped
-
-        rm -rf cleaned_sequences/
-
-        gzip ~{asm_name}.adapterClean.fa
-        gzip ~{asm_name}.clean.fasta
-        gzip ~{asm_name}.contam.fasta
+        
     
     >>>
 
     output {
-        File cleanFasta = "~{asm_name}.clean.fasta.gz"
-        File contamFasta = "~{asm_name}.contam.fasta.gz"
+        File cleanFasta = "~{asm_name}.clean.fasta"
+        File contamFasta = "~{asm_name}.contam.fasta"
         File report = "~{asm_name}.9606.fcs_gx_report.txt"
-        File adapter_CleanedSequence = "~{asm_name}.adapterClean.fa.gz"
-        File adapter_Report = "fcs_adaptor_report.txt"
+        
     }
 
     runtime {
@@ -129,3 +123,48 @@ task FCSGX {
         docker: 'ncbi/fcs-gx:latest '
     }
 }
+
+task FCS_adapter {
+    input {
+        File cleanFasta
+
+        String asm_name
+
+        Int memSizeGB = 32
+        Int preemptible = 1
+        Int diskSizeGB
+        Int threadCount
+    }
+    command <<<
+
+        #handle potential errors and quit early
+        set -o pipefail
+        set -e
+        set -u
+        set -o xtrace
+
+        # Run the adapter script 
+        /app/fcs/bin/av_screen_x -o . --euk ~{cleanFasta}
+        mv cleaned_sequences/* ~{asm_name}.adapterClean.fa # the output of FCS adapter is not actually gzipped
+
+        rm -rf cleaned_sequences/
+
+        gzip ~{asm_name}.adapterClean.fa
+        gzip ~{asm_name}.clean.fasta
+        gzip ~{asm_name}.contam.fasta
+
+        
+    >>>
+
+    output {
+        File adapter_CleanedSequence = "~{asm_name}.adapterClean.fa.gz"
+        File adapter_Report = "fcs_adaptor_report.txt"
+    }
+
+    runtime {
+        memory: memSizeGB + " GB"
+        preemptible : preemptible
+        docker: "ncbi/fcs-adaptor:latest "
+    }
+}
+
