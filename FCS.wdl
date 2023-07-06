@@ -105,13 +105,14 @@ task FCSGX {
         python3 /app/bin/run_gx --fasta ~{assembly} --gx-db ~{GxDB} --out-dir . --tax-id 9606
         zcat ~{assembly} | /app/bin/gx clean-genome --action-report ~{asm_name}.9606.fcs_gx_report.txt --output ~{asm_name}.clean.fasta --contam-fasta-out ~{asm_name}.contam.fasta 
 
-        
+        gzip ~{asm_name}.clean.fasta
+        gzip ~{asm_name}.contam.fasta
     
     >>>
 
     output {
-        File cleanFasta = "~{asm_name}.clean.fasta"
-        File contamFasta = "~{asm_name}.contam.fasta"
+        File cleanFasta = "~{asm_name}.clean.fasta.gz"
+        File contamFasta = "~{asm_name}.contam.fasta.gz"
         File report = "~{asm_name}.9606.fcs_gx_report.txt"
         
     }
@@ -150,8 +151,6 @@ task FCS_adapter {
         rm -rf cleaned_sequences/
 
         gzip ~{asm_name}.adapterClean.fa
-        gzip ~{asm_name}.clean.fasta
-        gzip ~{asm_name}.contam.fasta
 
         
     >>>
