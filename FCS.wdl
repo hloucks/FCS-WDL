@@ -98,7 +98,7 @@ task FCSGX {
         ln -s ~{manifest}
         ln -s ~{metaJSON}
         ln -s ~{seq_info}
-        ln -s ~{taxa}ß
+        ln -s ~{taxa}
 
         ln -s ~{assembly}
 
