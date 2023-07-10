@@ -17,7 +17,7 @@ workflow RunFCS{
         Int diskSizeGB  = 32
 
         String GxDB = basename(GXI, ".gxi")
-        String asm_name=basename(sub(sub(sub(assembly, "\\.gz$", ""), "\\.fasta$", ""), "\\.fa$", ""))
+        String asm_name=basename(sub(sub(assembly, "\\.gz$", ""), "\\.fasta$", ""))
     }
 
     call FCSGX {
