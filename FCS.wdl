@@ -17,7 +17,7 @@ workflow RunFCS{
         Int diskSizeGB  = 32
 
         String GxDB = basename(GXI, ".gxi")
-        String asm_name=sub(assembly, "\\.gz$", "")
+        String asm_name=basename(sub(sub(sub(assembly, "\\.gz$", ""), "\\.fasta$", ""), "\\.fa$", ""))
     }
 
     call FCSGX {
@@ -98,7 +98,7 @@ task FCSGX {
         ln -s ~{manifest}
         ln -s ~{metaJSON}
         ln -s ~{seq_info}
-        ln -s ~{taxa}
+        ln -s ~{taxa}ß
 
         ln -s ~{assembly}
 
