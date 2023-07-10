@@ -131,7 +131,7 @@ task FCS_adapter {
 
         String asm_name
 
-        Int memSizeGB = 32
+        Int memSizeGB = 48
         Int preemptible = 1
         Int diskSizeGB
         Int threadCount
