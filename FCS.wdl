@@ -145,6 +145,8 @@ task FCS_adapter {
         set -o xtrace
 
         # Run the adapter script 
+        echo `df -h .`
+        echo `du -h .`
         /app/fcs/bin/av_screen_x -o . --euk ~{cleanFasta}
         mv cleaned_sequences/* ~{asm_name}.adapterClean.fa # the output of FCS adapter is not actually gzipped
 
