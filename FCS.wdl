@@ -165,6 +165,7 @@ task FCS_adapter {
     runtime {
         memory: memSizeGB + " GB"
         preemptible : preemptible
+        disks: "local-disk " + diskSizeGB + " SSD"
         docker: "ncbi/fcs-adaptor:latest "
     }
 }
