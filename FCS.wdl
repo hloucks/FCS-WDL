@@ -38,7 +38,7 @@ workflow RunFCS{
 
             preemptible=preemptible,
             threadCount=threadCount,
-            diskSizeGB=diskSizeGBGX
+            diskSizeGBGX=diskSizeGBGX
     }
     call FCS_adapter{
         input:
@@ -48,7 +48,7 @@ workflow RunFCS{
 
             preemptible=preemptible,
             threadCount=threadCount,
-            diskSizeGB=diskSizeGBAdapter
+            diskSizeGBAdapter=diskSizeGBAdapter
     }
 
     output {
