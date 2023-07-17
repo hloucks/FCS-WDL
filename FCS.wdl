@@ -38,7 +38,7 @@ workflow RunFCS{
 
             preemptible=preemptible,
             threadCount=threadCount,
-            diskSizeGBGX=diskSizeGBGX
+            diskSizeGB=diskSizeGBGX
     }
     call FCS_adapter{
         input:
@@ -48,7 +48,7 @@ workflow RunFCS{
 
             preemptible=preemptible,
             threadCount=threadCount,
-            diskSizeGBAdapter=diskSizeGBAdapter
+            diskSizeGB=diskSizeGBAdapter
     }
 
     output {
@@ -82,7 +82,7 @@ task FCSGX {
 
         Int memSizeGB = 32
         Int preemptible = 1
-        Int diskSizeGBGX
+        Int diskSizeGB
         Int threadCount
 
     }
@@ -120,7 +120,7 @@ task FCSGX {
 
     runtime {
         memory: memSizeGB + " GB"
-        disks: "local-disk " + diskSizeGBGX + " SSD"
+        disks: "local-disk " + diskSizeGB + " SSD"
         preemptible : preemptible
         docker: 'ncbi/fcs-gx:latest '
     }
@@ -134,7 +134,7 @@ task FCS_adapter {
 
         Int memSizeGB = 48
         Int preemptible = 1
-        Int diskSizeGBAdapter
+        Int diskSizeGB
         Int threadCount
     }
     command <<<
@@ -166,7 +166,7 @@ task FCS_adapter {
     runtime {
         memory: memSizeGB + " GB"
         preemptible : preemptible
-        disks: "local-disk " + diskSizeGBAdapter + " SSD"
+        disks: "local-disk " + diskSizeGB + " SSD"
         docker: "ncbi/fcs-adaptor:latest "
     }
 }
