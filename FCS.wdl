@@ -93,6 +93,9 @@ task FCSGX {
         set -u
         set -o xtrace
 
+        echo `df -h .`
+        echo `du -h .`
+
         ln -s ~{blast_div}
         ln -s ~{GXI}
         ln -s ~{GXS}
