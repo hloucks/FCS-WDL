@@ -13,13 +13,13 @@ If running locally, the inputs.json file should look something like this:
 ```
 {
  "RunFCS.assembly": "Assembly.fa.gz",
- "RunFCS.blast_div": "/my_tmpfs/test-only/test-only.blast_div.tsv.gz",
- "RunFCS.GXI": "/my_tmpfs/test-only/test-only.gxi",
- "RunFCS.GXS": "/my_tmpfs/test-only/test-only.gxs",
- "RunFCS.manifest": "/my_tmpfs/test-only/test-only.manifest",
- "RunFCS.metaJSON": "/my_tmpfs/test-only/test-only.meta.jsonl",
- "RunFCS.seq_info":"/my_tmpfs/test-only/test-only.seq_info.tsv.gz",
- "RunFCS.taxa": "/my_tmpfs/test-only/test-only.taxa.tsv",
+ "RunFCS.blast_div": "/test-only/test-only.blast_div.tsv.gz",
+ "RunFCS.GXI": "/test-only/test-only.gxi",
+ "RunFCS.GXS": "/test-only/test-only.gxs",
+ "RunFCS.manifest": "/test-only/test-only.manifest",
+ "RunFCS.metaJSON": "/test-only/test-only.meta.jsonl",
+ "RunFCS.seq_info":"/test-only/test-only.seq_info.tsv.gz",
+ "RunFCS.taxa": "/test-only/test-only.taxa.tsv",
  "RunFCS.threadCount": 20,
  "RunFCS.preemptible": 1
 }

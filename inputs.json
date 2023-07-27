@@ -1,7 +1,5 @@
 {
  "RunFCS.assembly": "HG002-full-0.14_mat.fa.gz",
- "RunFCS.wrapperScript": "fcs.py",
- "RunFCS.adapterScript": "run_fcsadaptor.sh",
  "RunFCS.blast_div": "/my_tmpfs/test-only/test-only.blast_div.tsv.gz",
  "RunFCS.GXI": "/my_tmpfs/test-only/test-only.gxi",
  "RunFCS.GXS": "/my_tmpfs/test-only/test-only.gxs",
@@ -10,6 +8,5 @@
  "RunFCS.seq_info":"/my_tmpfs/test-only/test-only.seq_info.tsv.gz",
  "RunFCS.taxa": "/my_tmpfs/test-only/test-only.taxa.tsv",
  "RunFCS.threadCount": 20,
- "RunFCS.preemptible": 1,
- "RunFCS.diskSizeGB": 32
+ "RunFCS.preemptible": 1
 }
