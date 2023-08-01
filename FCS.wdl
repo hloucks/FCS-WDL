@@ -125,7 +125,7 @@ task FCSGX {
         memory: memSizeGB + " GB"
         disks: "local-disk " + diskSizeGB + " SSD"
         preemptible : preemptible
-        docker: 'ncbi/fcs-gx:latest '
+        docker: 'ncbi/fcs-gx:0.4.0'
     }
 }
 
@@ -170,7 +170,7 @@ task FCS_adapter {
         memory: memSizeGB + " GB"
         preemptible : preemptible
         disks: "local-disk " + diskSizeGB + " SSD"
-        docker: "ncbi/fcs-adaptor:latest "
+        docker: "ncbi/fcs-adaptor:0.4.0"
     }
 }
 
