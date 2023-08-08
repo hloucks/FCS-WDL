@@ -20,6 +20,8 @@ If running locally, the inputs.json file should look something like this:
  "RunFCS.metaJSON": "/test-only/test-only.meta.jsonl",
  "RunFCS.seq_info":"/test-only/test-only.seq_info.tsv.gz",
  "RunFCS.taxa": "/test-only/test-only.taxa.tsv",
+ "RunFCS.diskSizeGBGX": 500,
+ "RunFCS.diskSizeGBAdapter": 32,
  "RunFCS.threadCount": 20,
  "RunFCS.preemptible": 1
 }

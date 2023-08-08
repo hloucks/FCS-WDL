@@ -1,12 +1,14 @@
 {
- "RunFCS.assembly": "HG002-full-0.14_mat.fa.gz",
- "RunFCS.blast_div": "/my_tmpfs/test-only/test-only.blast_div.tsv.gz",
- "RunFCS.GXI": "/my_tmpfs/test-only/test-only.gxi",
- "RunFCS.GXS": "/my_tmpfs/test-only/test-only.gxs",
- "RunFCS.manifest": "/my_tmpfs/test-only/test-only.manifest",
- "RunFCS.metaJSON": "/my_tmpfs/test-only/test-only.meta.jsonl",
- "RunFCS.seq_info":"/my_tmpfs/test-only/test-only.seq_info.tsv.gz",
- "RunFCS.taxa": "/my_tmpfs/test-only/test-only.taxa.tsv",
+ "RunFCS.assembly": "./data/HG002-full-0.14.mat.fa.gz",
+ "RunFCS.blast_div": "./data/all.blast_div.tsv.gz",
+ "RunFCS.GXI": "./data/all.gxi",
+ "RunFCS.GXS": "./data/all.gxs",
+ "RunFCS.manifest": "./data/all.manifest",
+ "RunFCS.metaJSON": "./data/all.meta.jsonl",
+ "RunFCS.seq_info":"./data/all.seq_info.tsv.gz",
+ "RunFCS.taxa": "./data/all.taxa.tsv",
+ "RunFCS.diskSizeGBGX": 500,
+ "RunFCS.diskSizeGBAdapter": 32,
  "RunFCS.threadCount": 20,
  "RunFCS.preemptible": 1
 }
