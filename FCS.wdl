@@ -80,7 +80,7 @@ task FCSGX {
         String asm_name
         String GxDB
 
-        Int memSizeGB = 32
+        Int memSizeGB = 500
         Int preemptible = 1
         Int diskSizeGB
         Int threadCount
